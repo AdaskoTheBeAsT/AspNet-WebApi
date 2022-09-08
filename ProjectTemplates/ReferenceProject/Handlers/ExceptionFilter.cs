@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -14,10 +14,10 @@ namespace ReferenceProject
         {
             public ErrorResponse(Exception ex)
             {
-                Error = new ErrorDescription()
+                Error = new ErrorDescription
                 {
                     Message = ex.Message,
-                    InnerException = ex.InnerException != null ? ex.InnerException.Message : null
+                    InnerException = ex.InnerException?.Message
                 };
             }
 
@@ -32,9 +32,9 @@ namespace ReferenceProject
 
         public override void OnException(HttpActionExecutedContext actionExecutedContext)
         {
-            if (actionExecutedContext.Exception is HttpResponseException)
+            if (actionExecutedContext.Exception is HttpResponseException exception)
             {
-                actionExecutedContext.Response = (actionExecutedContext.Exception as HttpResponseException).Response;
+                actionExecutedContext.Response = exception.Response;
                 return;
             }
 

@@ -1,4 +1,4 @@
-﻿using Swashbuckle.Application;
+using Swashbuckle.Application;
 using System;
 using System.IO;
 using System.Reflection;
@@ -11,7 +11,9 @@ namespace ReferenceProject
         public static void Configure(HttpConfiguration config)
         {
             if (config == null)
+            {
                 throw new ArgumentNullException(nameof(config));
+            }
 
             // Use http://localhost:5000/swagger/ui/index to inspect API docs
             config
@@ -27,7 +29,7 @@ namespace ReferenceProject
 
                     // This code allow you to use XML-comments
                     var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                    var commentsFileName = Assembly.GetExecutingAssembly().GetName().Name + ".XML";
+                    var commentsFileName = Assembly.GetExecutingAssembly().GetName().Name + ".xml";
                     var commentsFile = Path.Combine(baseDirectory, "bin/" + commentsFileName);
 
                     c.IncludeXmlComments(commentsFile);

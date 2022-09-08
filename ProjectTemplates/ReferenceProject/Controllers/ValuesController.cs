@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -48,7 +48,7 @@ namespace ReferenceProject
         public IEnumerable<string> Get()
         {
             Logger.Information("URL: {HttpRequestUrl}");
-            return new string[] { "value1", "value2" };
+            return new [] { "value1", "value2" };
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace ReferenceProject
         [Route("GetComplex")]
         public ComplexType GetComplex()
         {
-            return new ComplexType() { Key = "Key", Value = "Value" };
+            return new ComplexType { Key = "Key", Value = "Value" };
         }
 
         /// <summary>

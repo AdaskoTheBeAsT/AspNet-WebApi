@@ -11,7 +11,7 @@
     <ProvideDefaultName>true</ProvideDefaultName>
     <LocationField>Enabled</LocationField>
     <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
-    <RequiredFrameworkVersion>4.7</RequiredFrameworkVersion>
+    <RequiredFrameworkVersion>4.7.2</RequiredFrameworkVersion>
     <Icon>__TemplateIcon.ico</Icon>
     <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
     <LanguageTag>C#</LanguageTag>
@@ -29,7 +29,6 @@
         <ProjectItem ReplaceParameters="true" TargetFileName="CorsConfig.cs">CorsConfig.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="FormatterConfig.cs">FormatterConfig.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="LoggerConfig.cs">LoggerConfig.cs</ProjectItem>
-        <ProjectItem ReplaceParameters="true" TargetFileName="OptionsMessageHandlerConfig.cs">OptionsMessageHandlerConfig.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="RouteConfig.cs">RouteConfig.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="SwaggerConfig.cs">SwaggerConfig.cs</ProjectItem>
       </Folder>
@@ -42,7 +41,6 @@
         <ProjectItem ReplaceParameters="true" TargetFileName="CacheControlMiddleware.cs">CacheControlMiddleware.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="ExceptionFilter.cs">ExceptionFilter.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="ExceptionLogger.cs">ExceptionLogger.cs</ProjectItem>
-        <ProjectItem ReplaceParameters="true" TargetFileName="OptionsHttpMessageHandler.cs">OptionsHttpMessageHandler.cs</ProjectItem>
       </Folder>
       <Folder Name="Properties" TargetFolderName="Properties">
         <ProjectItem ReplaceParameters="true" TargetFileName="AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>

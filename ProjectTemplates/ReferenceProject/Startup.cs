@@ -1,4 +1,5 @@
-﻿using System.IO;
+using System.IO;
+using System.Web;
 using System.Web.Http;
 using Microsoft.Owin;
 using Owin;
@@ -13,7 +14,7 @@ namespace ReferenceProject
         public void Configuration(IAppBuilder app)
         {
             // Use DotNetEnv v1.1.0 due to it is the only version with out dependencies
-            var envFilePath = System.IO.Path.Combine(System.Web.HttpRuntime.AppDomainAppPath, ".env");
+            var envFilePath = Path.Combine(HttpRuntime.AppDomainAppPath, ".env");
             if (File.Exists(envFilePath))
             {
                 DotNetEnv.Env.Load(envFilePath);
@@ -30,10 +31,10 @@ namespace ReferenceProject
             AutofacConfig.Configure(config);
 
             FormatterConfig.Configure(config);
+            SwaggerConfig.Configure(config);
             RouteConfig.Configure(config);
             LoggerConfig.Configure(config);
-            OptionsMessageHandlerConfig.Configure(config);
-            SwaggerConfig.Configure(config);
+            
 
             app.UseAutofacMiddleware(AutofacConfig.Container);
             app.UseAutofacWebApi(config);
