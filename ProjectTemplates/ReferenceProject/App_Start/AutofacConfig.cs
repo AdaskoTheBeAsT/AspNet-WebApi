@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Reflection;
 using System.Web.Http;
 using Autofac;
@@ -25,7 +25,9 @@ namespace ReferenceProject
         public static void Configure(HttpConfiguration config)
         {
             if (config == null)
+            { 
                 throw new ArgumentNullException(nameof(config));
+            }
 
             var builder = new ContainerBuilder();
 

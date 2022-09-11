@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Web.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -31,7 +31,7 @@ namespace ReferenceProject
                 Formatting = Formatting.None,
 #endif
                 ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
             };
 
             config.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;

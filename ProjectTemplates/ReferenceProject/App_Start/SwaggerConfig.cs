@@ -1,6 +1,7 @@
 using Swashbuckle.Application;
 using System;
 using System.IO;
+using System.Net.Http;
 using System.Reflection;
 using System.Web.Http;
 
@@ -21,11 +22,10 @@ namespace ReferenceProject
                 {
                     c.SingleApiVersion("v1", "A title for your API");
                     c.PrettyPrint();
-                    c.RootUrl(x =>
-                    {
-                        var idx = x.RequestUri.AbsoluteUri.IndexOf("swagger", StringComparison.InvariantCultureIgnoreCase);
-                        return x.RequestUri.AbsoluteUri.Substring(0, idx - 1);
-                    });
+                    c.RootUrl(
+                        req => string.Concat(
+                                req.RequestUri.GetLeftPart(UriPartial.Authority),
+                                req.GetRequestContext().VirtualPathRoot.TrimEnd('/')));
 
                     // This code allow you to use XML-comments
                     var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;

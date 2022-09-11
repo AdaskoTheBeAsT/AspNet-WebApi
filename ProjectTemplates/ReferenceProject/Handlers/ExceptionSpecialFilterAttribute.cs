@@ -2,34 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Formatting;
 using System.Web.Http;
 using System.Web.Http.Filters;
 
 namespace ReferenceProject
 {
-    public class ExceptionFilter : ExceptionFilterAttribute
+    public class ExceptionSpecialFilterAttribute
+        : ExceptionFilterAttribute
     {
-        private class ErrorResponse
-        {
-            public ErrorResponse(Exception ex)
-            {
-                Error = new ErrorDescription
-                {
-                    Message = ex.Message,
-                    InnerException = ex.InnerException?.Message
-                };
-            }
-
-            public class ErrorDescription
-            {
-                public string Message { get; set; }
-                public string InnerException { get; set; }
-            }
-
-            public ErrorDescription Error { get; set; }
-        }
-
         public override void OnException(HttpActionExecutedContext actionExecutedContext)
         {
             if (actionExecutedContext.Exception is HttpResponseException exception)
@@ -46,6 +26,27 @@ namespace ReferenceProject
             }
 
             actionExecutedContext.Response = actionExecutedContext.Request.CreateResponse(status, responseContent);
+        }
+
+        private sealed class ErrorResponse
+        {
+            public ErrorResponse(Exception ex)
+            {
+                Error = new ErrorDescription
+                {
+                    Message = ex.Message,
+                    InnerException = ex.InnerException?.Message,
+                };
+            }
+
+            public ErrorDescription Error { get; }
+
+            public class ErrorDescription
+            {
+                public string? Message { get; set; } = string.Empty;
+
+                public string? InnerException { get; set; } = string.Empty;
+            }
         }
     }
 }

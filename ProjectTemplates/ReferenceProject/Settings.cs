@@ -12,16 +12,16 @@ namespace ReferenceProject
     /// </summary>
     public static class Settings
     {
-        /// <summary>
-        /// Get value from appSettings section of web.config and expand environment variables
-        /// </summary>
-        /// <param name="name">Key name</param>
-        /// <returns></returns>
-        public static string Get(string name) => Environment.ExpandEnvironmentVariables(ConfigurationManager.AppSettings[name] ?? "");
-
-        public static string GetConnectionString(string name) => Environment.ExpandEnvironmentVariables(ConfigurationManager.ConnectionStrings[name]?.ConnectionString ?? "");
-
         public static string AllowedOrigins => Get(Constants.Settings.AllowedOrigins);
+
+        /// <summary>
+        /// Get value from appSettings section of web.config and expand environment variables.
+        /// </summary>
+        /// <param name="name">Key name.</param>
+        /// <returns></returns>
+        public static string Get(string name) => Environment.ExpandEnvironmentVariables(ConfigurationManager.AppSettings[name] ?? string.Empty);
+
+        public static string GetConnectionString(string name) => Environment.ExpandEnvironmentVariables(ConfigurationManager.ConnectionStrings[name]?.ConnectionString ?? string.Empty);
 
         public static class Auth
         {
@@ -35,20 +35,20 @@ namespace ReferenceProject
                         throw new Exception($"Your have to set up a '{Constants.Settings.Auth.CertThumbprint}' value in the web.config before using Settings.Auth.IssuerCertificate");
                     }
 
-                    if (signingCertificate != null)
+                    if (_signingCertificate != null)
                     {
-                        return signingCertificate;
+                        return _signingCertificate;
                     }
 
-                    signingCertificate = X509.LocalMachine.My.Thumbprint.Find(IssuerCertThumbprint).FirstOrDefault();
+                    _signingCertificate = X509.LocalMachine.My.Thumbprint.Find(IssuerCertThumbprint).FirstOrDefault();
 
-                    if (signingCertificate == null)
+                    if (_signingCertificate == null)
                     {
                         Log.Error("Can't find certificate with a thumbprint '{cert}'", IssuerCertThumbprint);
                         throw new Exception($"Can't find certificate with a thumbprint '{IssuerCertThumbprint}'");
                     }
 
-                    return signingCertificate;
+                    return _signingCertificate;
                 }
             }
 
@@ -58,7 +58,7 @@ namespace ReferenceProject
 
             public static string IssuerCertThumbprint => Get(Constants.Settings.Auth.CertThumbprint);
 
-            private static X509Certificate2 signingCertificate;
+            private static X509Certificate2 _signingCertificate;
         }
     }
 }

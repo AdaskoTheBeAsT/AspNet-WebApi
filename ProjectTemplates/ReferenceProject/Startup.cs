@@ -26,7 +26,7 @@ namespace ReferenceProject
             // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=316888
             HttpConfiguration config = new HttpConfiguration();
 
-            config.Filters.Add(new ExceptionFilter());
+            config.Filters.Add(new ExceptionSpecialFilterAttribute());
 
             AutofacConfig.Configure(config);
 

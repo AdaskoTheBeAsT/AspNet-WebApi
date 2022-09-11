@@ -17,8 +17,11 @@ namespace ReferenceProject
             // Use Serilog for logging
             // More information can be found here https://github.com/serilog/serilog/wiki/Getting-Started
 
+#pragma warning disable SCS0018
             var f = new FileInfo(Assembly.GetExecutingAssembly().Location);
-            var name = f.Name.Replace(f.Extension, "");
+#pragma warning restore SCS0018
+
+            var name = f.Name.Replace(f.Extension, string.Empty);
 
             // TODO: Adjust log file location and name. 
             // By default log file is located in 'C:\Users\<username>\AppData\Roaming\Logs' folder and named as the current assembly name

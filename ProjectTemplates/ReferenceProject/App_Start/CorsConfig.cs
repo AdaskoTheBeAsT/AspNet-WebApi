@@ -1,4 +1,4 @@
-﻿using Microsoft.Owin.Cors;
+using Microsoft.Owin.Cors;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Cors;
@@ -18,14 +18,16 @@ namespace ReferenceProject
         public static CorsOptions ConfigureCors(string origins = null)
         {
             if (string.IsNullOrWhiteSpace(origins))
+            { 
                 return CorsOptions.AllowAll;
+            }
 
             var corsPolicy = new CorsPolicy
             {
                 AllowAnyMethod = true,
                 AllowAnyHeader = true,
                 SupportsCredentials = true,
-                PreflightMaxAge = 86400
+                PreflightMaxAge = 86400,
             };
 
             corsPolicy.Headers.Add("Authorization");
@@ -36,14 +38,16 @@ namespace ReferenceProject
                 .ToList()
                 .ForEach(origin => corsPolicy.Origins.Add(origin));
 
-            if (!corsPolicy.Origins.Any())
+            if (corsPolicy.Origins.Count == 0)
+            { 
                 return CorsOptions.AllowAll;
+            }
 
             return new CorsOptions
             {
                 PolicyProvider = new CorsPolicyProvider
                 {
-                    PolicyResolver = context => Task.FromResult(corsPolicy)
+                    PolicyResolver = _ => Task.FromResult(corsPolicy)
                 }
             };
         }
